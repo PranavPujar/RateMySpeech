@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { startRecording, saveRecording } from "../handlers/recorder-controls";
 
+function downloadBlob(blob, filename) {
+  const a = document.createElement('a');
+  const url = window.URL.createObjectURL(blob);
+  a.href = url;
+  a.download = filename || 'recording.mp3';
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
+
 const initialState = {
   recordingMinutes: 0,
   recordingSeconds: 0,
@@ -80,7 +89,11 @@ export default function useRecorder() {
             };
           else return initialState;
         });
+
+        // Trigger automatic download
+        downloadBlob(blob, 'recording.mp3');
       };
+
     }
 
     return () => {
