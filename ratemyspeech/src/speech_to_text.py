@@ -11,28 +11,27 @@ model = whisper.load_model("base.en")
 openai.FineTuningJob.retrieve("ftjob-Bjca3SCCckSqKuOsXDMqWQdy")
 
 # Directory to monitor
-download_folder = 'downloads' #change of chrisians system
+download_folder = '/Users/pranavpujar/downloads' #change of chrisians system
 
 # Initialize a set to store the previous list of files
-previous_files = set()
-previous_files += os.listdir(download_folder)
+previous_files = set(os.listdir(download_folder))
 
 #always scanning downloads folder
 while True:
     # Get the current list of files in the folder
     current_files = set(os.listdir(download_folder))
-
+    
     # Find the new files
     new_files = current_files - previous_files
 
     if new_files:
         for new_file in new_files:
         
-            user_input_audio_file = new_files
+            user_input_audio_file = str(list(new_files)[0])
         
-            # print(f"New audio file detected: {new_file}")
+            print(f"New audio file detected: {new_file}")
         
-            result = model.transcribe(user_input_audio_file, fp16=False)
+            result = model.transcribe(f'{download_folder}/{user_input_audio_file}', fp16=False)
             input_words = result["text"] #this needs to have leetcode number
         
             response = openai.ChatCompletion.create(
@@ -44,13 +43,18 @@ while True:
             # Get the generated completion
             out_response = response.choices[0]['message']['content']
             out_response = out_response.split('|')
+
+            # print(input_words)
+            # print(out_response)
+            with open("output.txt", 'w+') as out_file:
+                out_file.writelines(out_response)
             #SEND TO FRONTEND
             
     # Update the previous file list
     previous_files = current_files
 
     # Sleep for a specified interval (e.g., 10 seconds) before checking again
-    time.sleep(10)
+    time.sleep(5)
 
 
 
