@@ -14,5 +14,14 @@ html {
 
 body {
   font-family: "Roboto Mono", monospace;
-  background-color: #f2ea02;
+  background-color: #272a2f;
+  /* This will be shown if the GIF fails to load */
+  background-image: url('./images/background.gif');
+  /* Set the gif as background */
+  background-repeat: no-repeat;
+  /* To prevent the image from repeating */
+  background-size: cover;
+  /* To make the image cover the entire viewport */
+  background-position: center center;
+  /* Center the background image */
 }

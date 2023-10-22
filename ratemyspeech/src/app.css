@@ -11,10 +11,10 @@
 }
 
 .recorder-container {
-  min-width: 300px;
-  width: 30vw;
-  height: 70vh;
+  min-width: 128px;
+  width: 15vw;
+  height: 50vh;
   border-radius: 1rem;
-  background: linear-gradient(to right, #41295a, #2f0743);
+  background: linear-gradient(to right, #232121, #232121);
   color: #fff;
 }
