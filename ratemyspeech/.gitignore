@@ -1,0 +1,8 @@
+# Ignore Node.js modules and dependencies
+node_modules/
+yarn.lock
+
+# Ignore build and development files
+build/
+.env
+.DS_Store
