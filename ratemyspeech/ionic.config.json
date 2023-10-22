@@ -1,0 +1,7 @@
+{
+    "name": "ratemyspeech",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
+}

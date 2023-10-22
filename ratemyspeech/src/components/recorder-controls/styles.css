@@ -6,7 +6,7 @@
 }
 
 .recorder-display {
-  width: 50%;
+  width: 30%;
   display: flex;
   align-items: center;
   font-size: 2rem;
@@ -16,6 +16,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -26,21 +27,22 @@
   height: 10px;
   margin-right: 0.5rem;
   border-radius: 50%;
-  background-color: #099fff;
+  background-color: #ff0903;
   animation-name: animated-block;
   animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
 .recording-time {
-  width: 80%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cancel-button-container {
-  width: 20%;
+  margin-left: 50px;
+  width: 60%;
   display: grid;
   place-content: center;
   animation-name: animated-block;
@@ -50,7 +52,7 @@
 .start-button,
 .cancel-button {
   border: none;
-  border-radius: 50%;
+  border-radius: 80%;
   background-color: #fff;
   cursor: pointer;
 }
@@ -60,8 +62,8 @@
 }
 
 .cancel-button {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
 }
 
 .start-button-container {
@@ -71,8 +73,8 @@
 }
 
 .start-button:hover {
-  color: #41295a;
-  background-color: #f2ea02;
+  color: #ffffff;
+  background-color: #000000;
 }
 
 .start-button {

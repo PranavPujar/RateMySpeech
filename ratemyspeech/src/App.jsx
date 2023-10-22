@@ -9,10 +9,16 @@ export default function App() {
 
   return (
     <section className="voice-recorder">
+      <div className="site-logo">RateMySpeech</div>
       <div className="recorder-container">
         <RecorderControls recorderState={recorderState} handlers={handlers} />
         <RecordingsList audio={audio} />
       </div>
+      <div className="chatbox-container">
+        {/* Your chatbox contents go here */}
+        <p>Chat messages here...</p>
+      </div>
     </section>
   );
 }
+
