@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">ratemyspeech</string>
-    <string name="title_activity_main">ratemyspeech</string>
-    <string name="package_name">io.ionic.ratemyspeech</string>
-    <string name="custom_url_scheme">io.ionic.ratemyspeech</string>
-</resources>
