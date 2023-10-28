@@ -6,7 +6,22 @@ openai.FineTuningJob.retrieve("ftjob-Bjca3SCCckSqKuOsXDMqWQdy")
 response = openai.ChatCompletion.create(
     model="ft:gpt-3.5-turbo-0613:personal::8CTSBp6M",
     messages=[
-      {"role": "user", "content": "With the answer format `score_out_of_10 | positives: [positive judgements] | negatives: [negative judgements]` please judge the conceptual solution given below for leetcode number 1 based on criteria that a real world technical interviewer would use? Conceptual Solution: Leetcode problem 349, Intersection of Two Arrays. So, for this one, I believe we can find the intersection of two arrays. One way to do it is by using a hash set, right? We can add all elements of the first array to the set and then iterate through the second array, checking if each element exists in the set. You know, checking if each element exists. If it does, we add it to the result. The time complexity uhh should be Oh of m plus n, where m and n the lengths of the two arrays, and the space complexity is Oh of m or n, depending on which array we store in the set. Seems pretty straightforward to me."}
+      {"role": "user", "content": "With the answer format \
+      `score_out_of_10 (integer form) | positives: [positive judgements] |\
+       negatives: [negative judgements]` please judge the \
+      conceptual solution given below for leetcode number \
+      1 based on criteria that a real world technical interviewer\
+      would use? Conceptual Solution: Leetcode problem 349, Intersection\
+      of Two Arrays. So, for this one, I believe we can find\
+      the intersection of two arrays. One way to do it is by \
+      using a hash set, right? We can add all elements of the\
+      first array to the set and then iterate through the second\
+      array, checking if each element exists in the set. You know,\
+      checking if each element exists. If it does, we add it to the \
+      result. The time complexity uhh should be Oh of m plus n, \
+      where m and n the lengths of the two arrays, and the space \
+      complexity is Oh of m or n, depending on which array we store\
+      in the set. Seems pretty straightforward to me."}
     ]
 )
 
