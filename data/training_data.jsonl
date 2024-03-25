@@ -1,0 +1,61 @@
+
+
+
+you are making a GPT wrapper for a program that takes in "technical interview performance" input and have to rate the technical interview performance by generating output in the following format:
+positives: [<list of positive parts of the interview>], negatives: [<list of negative parts of the interview>] and a score_out_of_10 (integer). 
+
+Here is an example: 
+
+
+positives: stack-based approach is a valid implementation of the solution. It is explained clearly and concisely, without many filler words. Correct time and space complexity 
+negatives: Edge cases and 
+score_out_of_10: 7
+
+The explanation does not explicitly mention consideration of edge cases.
+No Code Representation: While the explanation is clear, actual code representation could further solidify the understanding.
+Score_out_of_10:
+I would rate this explanation as a 7 out of 10. 
+
+analyze the interview performance based on the following: 
+Mentioning Time Complexity - 1
+Mentioning Space Complexity - 1
+Conciseness - 2
+Filler words (such as um, uh, etc) avoided - 1
+User response is a valid approach to solve the problem - 2
+User response is the most optimal approach to solve the problem - 2
+User response mentions edge cases - 1
+
+
+
+
+// Create 50 data points 
+// fine tune GPT-4 model
+// test output through API call
+
+{
+    "messages": [
+        {"role": "system", "content": "RMS is a technical interviewer that rates the techincal interview performance of its clients with the answer format `score_out_of_10 | positives: [positive_judgements] | negatives: [negative_judgements]` where score_out_of_10 is a decimal, positive_judgements and negative_judgements are strings of positive and negative feedback of the interview performance. "}, 
+        {"role": "user", "content": "Leetcode problem 20, Valid Parentheses. To validate parentheses, we can use a stack data structure. We iterate through the string and push opening parentheses onto the stack. When we encounter a closing parenthesis, we check if it matches the top of the stack. If they match, we pop the stack; otherwise, the string is invalid. This approach has a time complexity of Oh n as it makes a single pass through the string, and a space complexity of Oh n in the worst case for the stack. Validating parentheses in this way is a well-known method, and the solution is concise and efficient."}, 
+        {"role": "assistant", "content": "positives: [Stack-based approach is a valid implementation of the solution. Explanation is clear and concise, without many filler words. Correct time and space complexity], negatives: [No mention of edge cases], score_out_of_10: 9"}
+        ]
+}
+
+
+{
+    "messages": [
+        {"role": "system", "content": "RMS is a technical interviewer that rates the techincal interview performance of its clients with the answer format `score_out_of_10 | positives: [positive_judgements] | negatives: [negative_judgements]` where score_out_of_10 is a decimal, positive_judgements and negative_judgements are strings of positive and negative feedback of the interview performance. "}, 
+        {"role": "user", "content": "The Two Sum problem involves finding a pair of numbers in an array that sum up to a given target value. To address this, we'll consider both brute-force and optimal solutions. In the brute-force approach, we would iterate through the array and for each element, check if there exists another element in the array that complements it to reach the target. This approach has a time complexity of O of n squared due to nested iterations. The space complexity remains Oh of one as no additional data structures are used. For the optimal solution, we can use a hash map (or dictionary) to store each element along with its index. While iterating through the array, we can check if the complement of the current element such as target minus current element exists in the hash map. This allows us to achieve a time complexity of Oh n and a space complexity of Oh of n due to the extra space used for the hash map. Some edge cases include an Empty Array When the input array is empty, there are no elements to form a pair, so the result is an empty list, a Single Element Array If the array contains only one element, it's impossible to find a pair that sums up to the target. Multiple Pairs with the Same Sum If there are multiple pairs of elements with the same sum equal to the target, the algorithm will return any valid pair. It is not guaranteed which pair will be returned"}, 
+        {"role": "assistant", "content": "positives: [the solution is concise and well explained, mentions brute force and optimal solution, space and time complexity frequently mentioned, considers key concepts such as Hash map and complement key], negatives: [none], score_out_of_10: 10"}
+        ]
+}
+
+{
+    "messages": [
+        {"role": "system", "content": "RMS is a technical interviewer that rates the techincal interview performance of its clients with the answer format `score_out_of_10 | positives: [positive_judgements] | negatives: [negative_judgements]` where score_out_of_10 is a decimal, positive_judgements and negative_judgements are strings of positive and negative feedback of the interview performance. "}, 
+        {"role": "user", "content": "Leetcode problem 42, Trapping Rain Water. The goal here is to calculate the total amount of water that can be trapped between the bars in an elevation map. And, like, to solve this problem, we could use, uh, a two-pointer approach. Im thinking we can initialize two pointers at the beginning and end of the array and maintain variables to keep track of the left and right maximums encountered so far. During the traversal, if the left maximum is smaller than the right maximum, we know that the water trapped at the current bar depends on the left maximum. Also, uhh if the right maximum is …smaller, the trapped water depends on the right maximum. Let me think. So, uh, can we even calculate this? Yeah we can calculate the trapped water at each bar as the minimum of the left and right maximums minus the height … of the bar itself. By summing up the trapped water at each bar, we obtain the total trapped water. This approach has a time complexity of oh of n as it requires a single pass through the array. The space complexity is oh of one since we only use a few variables. There are a few edge cases to consider, we can have arrays with no trapped water and… empty arrays"},
+        {"role": "assistant", "content": "positives: [The solution provides a basic explanation of the two-pointer approach, explains the time and space complexity, and addresses common edge cases.], negatives: [The explanation lacks clarity, and shows slight confusion accompanied with filler words.], score_out_of_10: 7"}
+        ]
+}
+  
+
+

@@ -17,13 +17,13 @@ app.add_middleware(
 
 PORT_NUMBER = 8000
 
-openai.api_key = "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"
+# openai.api_key = "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"
+openai.api_key = "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"
 
 @app.get('/evaluate')
 async def evaluate(file_name, leetcode_num = None):
     
-    # if not file_name.endswith(('.wav', '.mp3', '.ogg', '.m4a')):
-    #     raise HTTPException(status_code=400, detail="Only wav, mp3, m4a, and ogg files are supported. Your file name is " + file_name)
+
     model = whisper.load_model("base.en")
 
     # Retrieve the gpt-3.5-turbo finetuned llm 
