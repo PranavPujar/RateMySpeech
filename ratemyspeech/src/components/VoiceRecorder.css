@@ -1,0 +1,84 @@
+
+.text-holder h1 {
+  margin: 0; /* Remove default margin */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px; /* Adjust as needed */
+  margin-top: 20px;
+}
+
+.record-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px; /* Smaller size */
+  height: 60px; /* Smaller size */
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.record-button:hover {
+  background-color: darkred;
+}
+
+.stop-button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px; /* Smaller size */
+  height: 40px; /* Smaller size */
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.stop-button:hover {
+  background-color: darkred;
+}
+
+audio {
+  margin-top: 20px;
+}
+/* src/VoiceRecorder.css */
+.text-holder {
+  position: relative; /* Required for absolute positioning */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 128px;
+  margin-top: 0px;
+  margin-left: 0vw;
+  width: 20vw;
+  height: 45vh;
+  border-radius: 1rem;
+  background: linear-gradient(to right, #232121, #232121);
+  color: #fff;
+  padding-top: 20px; /* Add some padding at the top for spacing */
+}
+
+.done-button {
+  position: absolute;
+  bottom: 60px; /* Adjust to increase/decrease distance from the bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.done-button:hover {
+  background-color: darkgreen;
+}

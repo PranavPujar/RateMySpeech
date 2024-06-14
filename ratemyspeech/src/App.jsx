@@ -1,44 +1,56 @@
-import { useState } from "react";
-import "./app.css";
-import RecorderControls from "./components/recorder-controls";
-import RecordingsList from "./components/recordings-list";
-import useRecorder from "./hooks/useRecorder";
-
-export default function App() {
-  const { recorderState, ...handlers } = useRecorder();
-  const { audio } = recorderState;
-  const [ toDisplay, setToDisplay ] = useState();
+// src/App.jsx
+import React, { useState, useRef } from 'react';
+import './App.css';
+import VoiceRecorder from './components/VoiceRecorder'
 
 
-  const fetchThing = () => {
-    // make call to fetch response
-    const fetchData = async () => {
-        console.log("File")
-        try {
-          const response = await fetch(`http://localhost:8000/evaluate?file_name=output.mp3`);
-          console.log(response)
-          const result = await response.json();
-          console.log(result)
-          setToDisplay(result)
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-      fetchData();
-  }
+const App = () => {
+  const [recording, setRecording] = useState(false);
+  const [audioURL, setAudioURL] = useState('');
+  const [toDisplay, setToDisplay] = useState();
+  const mediaRecorderRef = useRef(null);
+  const chunksRef = useRef([]);
+  const audioStreamRef = useRef(null);
+
+  const startRecording = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    audioStreamRef.current = stream;
+    mediaRecorderRef.current = new MediaRecorder(stream);
+    mediaRecorderRef.current.ondataavailable = (event) => {
+      chunksRef.current.push(event.data);
+    };
+    mediaRecorderRef.current.onstop = () => {
+      const blob = new Blob(chunksRef.current, { type: 'audio/wav' });
+      const url = URL.createObjectURL(blob);
+      setAudioURL(url);
+      chunksRef.current = [];
+      // Stop all tracks to release the microphone
+      audioStreamRef.current.getTracks().forEach((track) => track.stop());
+    };
+    mediaRecorderRef.current.start();
+    setRecording(true);
+  };
+
+  const stopRecording = () => {
+    mediaRecorderRef.current.stop();
+    setRecording(false);
+  };
+
 
   return (
     <section className="voice-recorder">
       <div className="site-logo">RateMySpeech</div>
       <div className="recorder-container">
-        <RecorderControls recorderState={recorderState} handlers={handlers} />
-        <RecordingsList audio={audio} />
-        <button onClick={fetchThing}>Done</button>
+        <VoiceRecorder />
       </div>
       <div className="chatbox-container">
         <p>{toDisplay ? toDisplay["result"] : "Chat messages here..."}</p>
       </div>
+      <div className="playback-container">
+        {audioURL && <audio controls src={audioURL} />}
+      </div>
     </section>
-  );
-}
+  );  
+};
 
+export default App;

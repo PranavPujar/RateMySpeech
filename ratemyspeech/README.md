@@ -65,7 +65,7 @@ Now take a look at the components `<RecorderControls/>` and `<RecordingsList/>`.
 
 `<RecorderControls/>` have the prop handlers and this is used by the jsx
 
-**`<RecordingsList/>`**
+**`</>`**
 ![recordings list](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g78xyklm1877jxiegs78.png)
 
 `<RecordingsList/>` receives `audio` and consumes a custom hook that pushes the audio created previously.

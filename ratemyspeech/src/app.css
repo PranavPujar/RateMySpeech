@@ -45,7 +45,6 @@
 
   /* Adding a white outline */
   -webkit-text-stroke: .2px white;
-  text-stroke: .2px white;
 
   /* Transition */
   transition: all 0.3s ease;
