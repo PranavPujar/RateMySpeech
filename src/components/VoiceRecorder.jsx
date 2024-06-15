@@ -2,7 +2,7 @@
 import React, { useState, useRef } from 'react';
 import './VoiceRecorder.css'; 
 
-const VoiceRecorder = () => {
+const VoiceRecorder = ({ onDisplayUpdate }) => {
   const [recording, setRecording] = useState(false);
   const [audioURL, setAudioURL] = useState('');
   const [generateable, setGenerateable] = useState(false);
@@ -38,8 +38,7 @@ const VoiceRecorder = () => {
       formData.append("file", audioBlobRef.current, "recording.wav");
 
       try {
-
-        const response = await fetch("http://localhost:8000/audio", {
+        const response = await fetch("http://localhost:8000/audio", { //change endpoint address prior to deployment
           method: "POST",
           body: formData,
         });
@@ -60,21 +59,21 @@ const VoiceRecorder = () => {
   };
 
   const extractGPTAnalysis = async (transcription) => {
-    console.log(JSON.stringify({transcription}))
+    console.log(JSON.stringify({ transcription }))
     try {
-      const response = await fetch("http://localhost:8000/evaluate", {
-        method: "POST", 
+      const response = await fetch("http://localhost:8000/evaluate", { //change endpoint address prior to deployment
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({transcription}), 
+        body: JSON.stringify({ transcription }),
       });
-      
+
       const result = await response.json();
       console.log(result);
 
-      // setToDisplay(result);
-      
+      onDisplayUpdate(result);
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -86,32 +85,30 @@ const VoiceRecorder = () => {
     setGenerateable(true);
   };
 
-
   const handleDoneClick = async () => {
     const response = await transmitAudioToBackend();
     await extractGPTAnalysis(response.transcription);
-    
+
     setAudioURL('');
     setGenerateable(false);
   };
-
 
   return (
     <div className="text-holder">
       <h1>Audio Recorder</h1>
       <div className="button-container">
-        <button 
-          onClick={startRecording} 
-          disabled={recording} 
-          className="record-button" 
+        <button
+          onClick={startRecording}
+          disabled={recording}
+          className="record-button"
           type="button"
         >
           Record
         </button>
-        <button 
-          onClick={stopRecording} 
-          disabled={!recording} 
-          className="stop-button" 
+        <button
+          onClick={stopRecording}
+          disabled={!recording}
+          className="stop-button"
           type="button"
         >
           &#x25A0; {/* Unicode for the stop icon */}
