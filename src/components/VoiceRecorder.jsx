@@ -38,7 +38,7 @@ const VoiceRecorder = ({ onDisplayUpdate }) => {
       formData.append("file", audioBlobRef.current, "recording.wav");
 
       try {
-        const response = await fetch("http://localhost:8000/audio", { //change endpoint address prior to deployment
+        const response = await fetch("http://127.0.0.1:8000/audio", { //change endpoint address prior to deployment
           method: "POST",
           body: formData,
         });
@@ -61,7 +61,7 @@ const VoiceRecorder = ({ onDisplayUpdate }) => {
   const extractGPTAnalysis = async (transcription) => {
     console.log(JSON.stringify({ transcription }))
     try {
-      const response = await fetch("http://localhost:8000/evaluate", { //change endpoint address prior to deployment
+      const response = await fetch("http://127.0.0.1:8000/evaluate", { //change endpoint address prior to deployment
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,9 @@ const VoiceRecorder = ({ onDisplayUpdate }) => {
 
   const handleDoneClick = async () => {
     const response = await transmitAudioToBackend();
+    console.log('before API call')
     await extractGPTAnalysis(response.transcription);
+    console.log('after API call')
 
     setAudioURL('');
     setGenerateable(false);
