@@ -1,0 +1,11 @@
+trigger:
+  - main  
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: |
+      npm install
+      npm run build
+    displayName: 'Install and Build React App'

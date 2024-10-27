@@ -1,0 +1,15 @@
+trigger:
+  - main  
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
+  
+  - script: |
+      python -m uvicorn your_module:app --host 0.0.0.0 --port 8000 --workers 4
+    displayName: 'Run FastAPI Server'
