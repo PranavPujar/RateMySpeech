@@ -1,9 +1,10 @@
-import openai
+from openai import OpenAI
 import whisper
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
 from io import BytesIO
+from os import getenv
 import tempfile
 from pydantic import BaseModel
 
@@ -22,7 +23,7 @@ app.add_middleware(
 PORT_NUMBER = 8000
 
 # Accessible through OpenAI acc
-openai.api_key = "sk-proj-yKongnqBqZGAXeUfQsc4T3BlbkFJ9RVnpIyCg7RfJ7Atzigq"\
+client = OpenAI(api_key=getenv('OPENAI_API_KEY_personal'))
 
 app = FastAPI()
 
@@ -87,14 +88,15 @@ async def evaluate(ft_output: TranscriptionRequest):
 
     try:
         # Retrieve the gpt-3.5-turbo finetuned llm 
-        openai.FineTuningJob.retrieve("ftjob-7MeRmaRQoCcXUzcNhw7UdGUS")
+
+        # openai.FineTuningJob.retrieve("ftjob-7MeRmaRQoCcXUzcNhw7UdGUS")
 
         # Rertrive fine-tuned model response 
-        response = openai.ChatCompletion.create(
-        model="ft:gpt-3.5-turbo-0613:personal::8CTSBp6M",
+        response = client.chat.completions.create(
+        model="ft:gpt-3.5-turbo-1106:personal:final-rms:9XxeZoxm",
         messages= [{"role": "system", "content": "You are RMS, a technical interviewer that rates the technical interview performance of its clients with the answer format `positives: [positive_judgements] | negatives: [negative_judgements] | score_out_of_10` where score_out_of_10 is a decimal, positive_judgements and negative_judgements are strings of positive and negative feedback of the interview performance. analyze the interview performance based on the following, keeping in mind the weights of each parameter:\nUser response is a valid approach to solve the problem - 2\nUser response is the most optimal approach to solve the problem - 2\nConciseness - 2\nMentioning Time Complexity - 1\nMentioning Space Complexity - 1\nFiller words (such as um, uh, etc) avoided - 1\nUser response mentions edge cases - 1.\nProvide your positive and negative judgements in a conversational manner."},{"role": "user", "content": f"{ft_output.transcription}"}])
         
-        response = response.choices[0]['message']['content']
+        response = response.choices[0].message.content
         response = response.split('|')
 
         # If input audio is indeed an attempt to solve a technical problem 

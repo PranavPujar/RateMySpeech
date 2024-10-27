@@ -1,0 +1,6 @@
+openai
+uvicorn
+openai-whisper
+fastapi
+starlette
+pydantic
