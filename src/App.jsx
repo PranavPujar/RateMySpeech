@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useState } from 'react';
-import './App.css';
+import './app.css';
 import VoiceRecorder from './components/VoiceRecorder'
 
 const App = () => {
