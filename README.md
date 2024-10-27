@@ -1,78 +1,52 @@
-# Getting Started with Create React App
+# RateMySpeech - AI Interview Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+RateMySpeech is a powerful AI-driven tool designed to assist users in preparing for technical interviews. Leveraging advanced speech recognition technology and the OpenAI GPT model, this application provides real-time feedback on interview responses, helping users improve their performance through constructive critiques.
 
-In the project directory, you can run:
+## Key Features
 
-### `yarn start`
+- **Audio Recording**: Users can easily record their responses during mock interviews using the built-in voice recorder.
+- **Transcription**: The app transcribes recorded audio into text, enabling users to review their answers.
+- **AI Feedback**: Utilizing a fine-tuned OpenAI model, the app analyzes the transcription and provides feedback on various aspects of the interview performance, including:
+  - Technical accuracy
+  - Clarity and conciseness
+  - Time and space complexity considerations
+  - Awareness of edge cases
+  - Usage of filler words
+- **User-Friendly Interface**: The application features an intuitive interface that guides users through the recording and feedback process seamlessly.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How It Works
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. **Record Your Response**: Users can record their answers to technical questions.
+2. **Transcription**: Once the recording is complete, the audio is sent to the server, where it is transcribed into text using the Whisper AI model.
+3. **Feedback Analysis**: The transcribed text is analyzed by a fine-tuned OpenAI GPT model, which provides feedback structured in a clear format.
+4. **Review Feedback**: Users receive detailed insights on their performance, including positives, negatives, and a score out of 10, enabling them to focus on areas for improvement.
 
-### `yarn build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To get started with RateMySpeech:
 
-## Explanation
+1. **Clone the Repository**:
 
-When we develop a web app we can think browsers like a swiss knifes, these include a bunch of utilities (APIs), one of them is get media devices access througth `mediaDevices` API from the `navigator` object, this allows to devs create features related with the user media devices, this features migth be create voice notes, like Whatsapp Web does.
+   ```bash
+   git clone <repository-url>
+   cd RateMySpeech
+   ```
 
-Today we gonna create an app that records the user's voice and then saves the recorded voice on a `<audio>` tag will be played later, this app look likes this
+   _on one terminal_:
 
-![recorder app](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oaub4ck5mn43nmrgds06.gif)
+   ```bash
+   cd server
+   uvicorn main:app --reload
+   ```
 
-Apart `mediaDevices` API we require
+   _on another terminal terminal_:
 
-- `MediaRecorder` constructor, this creates a recorder object from the requested media device througth `mediaDevices.getUserMedia()` method.
-- `Blob` constructor, this one allows create a blob object from the data adquired from `MediaRecorder` instance.
-- `URL.createObjectURL(blob)` method, this creates a URL, the URL contains the data (voice) create previously from the `Blob` instance and it is gonna be use like `<audio src=URL/`.
+   ```bash
+   npm install
+   npm start
+   ```
 
-If you don't understand, don't worry, I'll explain you below. First, look at the `<App/>` component.
-
-![app component](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1dukjr5ni7u7o5k550xj.png)
-
-`<App/>` consumes a custom hook that provides the recorderState and several handlers. If you don't know how to use a custom hook I share with you a [post](https://dev.to/jleonardo007/keep-your-react-components-clean-with-custom-hooks-j74) about this.
-
-The recorderState is like this:
-![recorder state](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yr3daou2rjwmhvxqto8s.png)
-
-- `recordingMinutes` and `recordingSeconds` are use to show the recording time and `initRecording` initializates the recorder.
-- The other parts of the state, `mediaStream` will be the media device provide by `mediaDevices.getUserMedia()` and `mediaRecorder` will be the instance of `MediaRecorder`, `audio` will be the URL mentioned previously.
-
-`mediaStream` is set by the handler `startRecording`
-![start recording](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k2k92emx5u4c6vn4xdzd.png)
-
-After set the `mediaStream`, `MediaRecorder` instance is created
-![create media stream](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nx0j3vm21b6x2slg94sp.png)
-
-Then `audio` is set
-![set audio](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jj3ff17wa0rwob4vkdzi.png)
-
-To adquire the voice and create the audio `mediaRecorder` needs create two event listeners `ondataavailable` and `onstop` the first one gets chunks of the voice and pushes it to the array `chunks` and the second one is use to create the blob througth `chunks` then audio is created. The stop event is fired by `saveRecording` handler or the effect cleanup function, the cleanup function is called when recording is cancel.
-
-![save recording](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sd53zppdwtx2iq0itslj.png)
-
-Now take a look at the components `<RecorderControls/>` and `<RecordingsList/>`.
-
-**`<RecorderControls/>`**
-![recorder controls](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xyp15ontihkkr7d7bauo.png)
-
-`<RecorderControls/>` have the prop handlers and this is used by the jsx
-
-**`</>`**
-![recordings list](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/g78xyklm1877jxiegs78.png)
-
-`<RecordingsList/>` receives `audio` and consumes a custom hook that pushes the audio created previously.
-
-![use recorginds list](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r9hlinqgisuea4e4tiz6.png)
-
-The handler `deleteAudio` is like this
-![delete audio](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3xq9g3hy9108qvyqdetz.png)
-
-And that's it! With React we can make use of `useEffect` to access the user devices and create related features.
+2. **RMS is Deployed! Check the website:**
+   `www.ratemyspeech.com`
