@@ -14,7 +14,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"], # change the origin address when deploying
+    allow_origins=["http://localhost:3000", "https://rate-my-speech-s5a2.vercel.app/"], # change the origin address when deploying
     allow_credentials=True,
     allow_methods=["POST", "OPTIONS"],  
     allow_headers=["*"],  
@@ -141,3 +141,4 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(app, host="localhost", port=PORT_NUMBER) # change uvicorn server port
+
